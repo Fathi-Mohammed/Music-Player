@@ -1,5 +1,3 @@
-jQuery(document).ready(function ($) {});
-
 const prevBtn = document.querySelector(".prev_button__");
 const playBtn = document.querySelector(".play_puse_button__");
 const playBtnIcon = document.querySelector("#play_puse_icon__");
@@ -11,6 +9,9 @@ const progress = document.querySelector("#music_range_input");
 const volumeProgress = document.querySelector(".volume_progress_input");
 const volumeIcon = document.querySelector("#volume_icon");
 const bodyBackgroundImg = document.querySelector("#body_background_img");
+let current = 0;
+let currentSong;
+
 
 songs.forEach((song) => {
   song.ele.addEventListener("ended", () => {
@@ -18,8 +19,6 @@ songs.forEach((song) => {
   });
 });
 
-let current = 0;
-let currentSong;
 
 const updatePlayingSongInfo = function (current) {
   currentSong = songs[current].ele;
