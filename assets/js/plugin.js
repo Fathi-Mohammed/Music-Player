@@ -12,13 +12,11 @@ const bodyBackgroundImg = document.querySelector("#body_background_img");
 let current = 0;
 let currentSong;
 
-
 songs.forEach((song) => {
   song.ele.addEventListener("ended", () => {
     nextBtn.click();
   });
 });
-
 
 const updatePlayingSongInfo = function (current) {
   currentSong = songs[current].ele;
@@ -26,75 +24,72 @@ const updatePlayingSongInfo = function (current) {
   artistName.textContent = songs[current].audioArtist;
   songCover.src = songs[current].audioCover;
   bodyBackgroundImg.src = songs[current].audioCover;
-  
-  songs.forEach((song)=> {
+
+  songs.forEach((song) => {
     song.played = false;
-  })
-  songs[current].played = true
+  });
+  songs[current].played = true;
 };
 
 updatePlayingSongInfo(current);
 
-playBtn.addEventListener("click", () => {
-  playPauseSong();
-  console.log(songs)
-});
+const operateMusicControls = function () {
+  $(".control_button").on("click", function () {
+    if ($(this).hasClass("next_button__")) {
+      updateSong("next");
+    } else if ($(this).hasClass("play_puse_button__")) {
+    } else {
+      updateSong("prev");
+    }
+    playPauseSong();
+    console.log(songs);
+  });
+};
 
-nextBtn.addEventListener("click", () => {
-  updateSong("next");
-  playPauseSong();
-  console.log(songs)
-});
-
-prevBtn.addEventListener("click", () => {
-  updateSong("prev");
-  playPauseSong();
-  console.log(songs)
-});
+operateMusicControls();
 
 function musicProgressColor(ele) {
   let value = ((ele.value - ele.min) / (ele.max - ele.min)) * 100;
   ele.style.background = `linear-gradient(90deg, #000 ${value}%, #938F7E ${value}%)`;
 }
 
-const volumeProgressingToSongVolume = function(){
+const volumeProgressingToSongVolume = function () {
   currentSong.volume = parseFloat(volumeProgress.value / 100);
-}
+};
 
 progress.addEventListener("input", function () {
   musicProgressColor(this);
 });
 
 volumeProgress.addEventListener("change", () => {
-  volumeProgressingToSongVolume()
+  volumeProgressingToSongVolume();
 });
 
-
-volumeIcon.addEventListener('click',()=>{
+volumeIcon.addEventListener("click", () => {
   if (volumeProgress.value == 0) {
     volumeProgress.value = 100;
   } else {
-    volumeProgress.value = 0 ;
+    volumeProgress.value = 0;
   }
-  volumeProgressingToSongVolume()
+  volumeProgressingToSongVolume();
   musicProgressColor(volumeProgress);
-  changeVolumeIcon()
-})
+  changeVolumeIcon();
+});
 
 volumeProgress.addEventListener("input", function () {
   musicProgressColor(volumeProgress);
-  changeVolumeIcon()
+  changeVolumeIcon();
 });
 
-const changeVolumeIcon = function() {
-  if(volumeProgress.value >= 50) {
+const changeVolumeIcon = function () {
+  if (volumeProgress.value >= 50) {
     volumeIcon.className = "las la-volume-up";
-  } else if (volumeProgress.value >= 1){
+  } else if (volumeProgress.value >= 1) {
     volumeIcon.className = "las la-volume-down";
   } else {
-    volumeIcon.className = "las la-volume-mute"
+    volumeIcon.className = "las la-volume-mute";
   }
-}
+};
 
 musicProgressColor(volumeProgress);
 
