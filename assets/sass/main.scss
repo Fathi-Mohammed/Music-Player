@@ -1,0 +1,152 @@
+@import "variables";
+@import "music_photo";
+@import "control_button";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #999;
+  height: 100vh;
+  position: relative;
+  font-family: "Montserrat";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: start;
+  color: $headingMainColor;
+}
+
+p {
+  text-align: start;
+  color: $headingMainColor;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1095px;
+  }
+}
+
+
+.played_music_wrapper_block_border__ {
+  padding: 0 20px;
+  position: relative;
+
+  &:not(:last-of-type) {
+    &::after {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 25px;
+      background-color: #000;
+      inset-inline-end: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.music_player_section {
+  // background-color: rgba(#fff , 0.5);
+  // backdrop-filter: blur(100px);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 26px;
+  max-height: 110px;
+  z-index: 1000;
+  
+  .played_music_wrapper__ {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .progress_input {
+    appearance: none;
+    width: 246px;
+    height: 5px;
+    border: 0;
+    border-radius: $mainBorderRadius;
+    cursor: pointer;
+    
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background-color: #000;
+      border-radius: 50%;
+    }
+
+    &.volume_progress_input {
+      max-width: 97px;
+    }
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: -1;
+    border-radius: $secondBorderRadius $secondBorderRadius 0 0;
+    filter: blur(2px);
+    opacity: 0.55;
+
+  }
+}
+
+.volume_progress_wrapper__ {
+  display: flex;
+  align-items: center;
+
+  
+  i {
+    margin-inline-end: 20px;
+    font-size: 20px !important;
+    font-style: normal !important;
+    font-weight: 900 !important;
+    color: #000;
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  .figure__ {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden !important;
+    max-height: 100vh;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(transparent ,#fff);
+    opacity: 0.8;
+  }
+}
